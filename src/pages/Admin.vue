@@ -8,11 +8,11 @@
 
 <script>
 export default {
-    name: 'admin',
-    data() {
-        return {
-            msg: 'admin page.'
-        }
-    }
-}
+  name: 'admin',
+  data() {
+    return {
+      msg: 'admin page.',
+    };
+  },
+};
 </script>

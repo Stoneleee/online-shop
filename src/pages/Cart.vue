@@ -8,11 +8,11 @@
 
 <script>
 export default {
-  name: "cart",
+  name: 'cart',
   data() {
     return {
-      msg: "cart page."
+      msg: 'cart page.',
     };
-  }
+  },
 };
 </script>
