@@ -4,14 +4,7 @@
       <h1>{{msg}}</h1>
     </div>
     <template v-for="product in cart">
-      <div :key="product._id" class="product">
-        <p class="product__name">产品名称： {{product.name}}</p>
-        <p class="product__description">介绍：{{product.description}}</p>
-        <p class="product__price">价格：{{product.price}}</p>
-        <p class="product__manufacturer">生产厂商：{{product.manufacturer.name}}</p>
-        <img :src="product.image" alt class="product__image" />
-        <button @click="removeFromCart(product._id)">从购物车移除</button>
-      </div>
+      <product-item :key="product._id" :product="product"></product-item>
     </template>
   </div>
 </template>
@@ -28,6 +21,7 @@
 </style>
 
 <script>
+import ProductItem from '@/components/products/ProductItem'
 export default {
   name: 'cart',
   data() {
@@ -42,12 +36,8 @@ export default {
     }
   },
 
-  methods: {
-    removeFromCart(productId) {
-      this.$store.commit('REMOVE_FROM_CART', {
-        productId
-      });
-    },
-  },
+  components: {
+    'product-item': ProductItem,
+  }
 };
 </script>

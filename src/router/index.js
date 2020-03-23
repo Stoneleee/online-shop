@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '@/pages/Home';
 import Cart from '@/pages/Cart';
+import Detail from '@/pages/Detail';
 
 // admin components
 import Index from '@/pages/admin/Index';
@@ -45,5 +46,10 @@ export default new Router({
       name: 'Cart',
       component: Cart,
     },
+    {
+      path: '/detail/:id',
+      name: 'Detail',
+      component: Detail,
+    }
   ],
 });
