@@ -10,24 +10,24 @@
 <script>
 import ProductForm from '@/components/products/ProductForm.vue';
 export default {
-  data() {
-    return {
-      model: {},
-      manufacturers: [
-        {
-          _id: 'sam',
-          name: 'Samsung',
-        },
-        {
-          _id: 'apple',
-          name: 'Apple'
-        },
-      ]
+  created() {
+    if (this.manufacutrers.length === 0) {
+      this.$store.dispatch('allManufacturers');
+    }
+  },
+  computed: {
+    manufacutrers() {
+      return this.$store.getters.allManufacturers;
+    },
+    model() {
+      return {};
     }
   },
   methods: {
     addProduct(model) {
-      console.log('model', model);
+      this.$store.dispatch('addProduct', {
+        product: model,
+      })
     },
   },
   components: {
