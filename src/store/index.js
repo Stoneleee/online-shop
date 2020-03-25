@@ -12,7 +12,7 @@ export default new Vuex.Store({
   state: {
     // bought items
     cart: [],
-    //ajax loader
+    // ajax loader
     showLoader: false,
     // selected product
     product: {},
@@ -20,6 +20,8 @@ export default new Vuex.Store({
     products: [],
     // all manufacturers
     manufacturers: [],
+    // selected manufacturer
+    manufacturer: {},
   },
 
   mutations: {

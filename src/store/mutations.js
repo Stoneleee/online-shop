@@ -1,31 +1,56 @@
+import {
+  ADD_PRODUCT,
+  ADD_PRODUCT_SUCCESS,
+  PRODUCT_BY_ID,
+  PRODUCT_BY_ID_SUCCESS,
+  UPDATE_PRODUCT,
+  UPDATE_PRODUCT_SUCCESS,
+  REMOVE_PRODUCT,
+  REMOVE_PRODUCT_SUCCESS,
+  ALL_PRODUCTS,
+  ALL_PRODUCTS_SUCCESS,
+  ALL_MANUFACTURERS,
+  ALL_MANUFACTURERS_SUCCESS,
+  MANUFACTURER_BY_ID,
+  MANUFACTURER_BY_ID_SUCCESS,
+  ADD_MANUFACTURER,
+  ADD_MANUFACTURER_SUCCESS,
+  UPDATE_MANUFACTURER,
+  UPDATE_MANUFACTURER_SUCCESS,
+  REMOVE_MANUFACTURER,
+  REMOVE_MANUFACTURER_SUCCESS,
+  ADD_TO_CART,
+  REMOVE_FROM_CART,
+} from './mutation-types';
+
 export const productMutations = {
-  ALL_PRODUCTS(state) {
+  [ALL_PRODUCTS](state) {
     state.showLoader = true;
   },
 
-  ALL_PRODUCTS_SUCCESS(state, payload) {
+  [ALL_PRODUCTS_SUCCESS](state, payload) {
     state.showLoader = false;
 
     const { products } = payload;
     state.products = products;
   },
 
-  PRODUCT_BY_ID(state) {
+  [PRODUCT_BY_ID](state) {
     state.showLoader = true;
   },
 
-  PRODUCT_BY_ID_SUCCESS(state, payload) {
+  [PRODUCT_BY_ID_SUCCESS](state, payload) {
     state.showLoader = false;
 
     const { product } = state;
     state.product = product;
   },
 
-  REMOVE_PRODUCT(state) {
+  [REMOVE_PRODUCT](state) {
     state.showLoader = true;
   },
 
-  REMOVE_PRODUCT_SUCCESS(state, payload) {
+  [REMOVE_PRODUCT_SUCCESS](state, payload) {
     state.showLoader = false;
 
     const { productId } = payload;
@@ -33,44 +58,43 @@ export const productMutations = {
       product._id !== productId);
   },
 
-  UPDATE_PRODUCT(state) {
+  [UPDATE_PRODUCT](state) {
     state.showLoader = true;
   },
 
-  UPDATE_PRODUCT_SUCCESS(state, payload) {
+  [UPDATE_PRODUCT_SUCCESS](state, payload) {
     state.showLoader = false;
 
     const { product: newProduct } = payload;
     state.product = newProduct;
-    state.products = state.products.map(product => {
+    state.products = state.products.map((product) => {
       if (product._id === newProduct._id) {
         return newProduct;
       }
 
-      return product
+      return product;
     });
   },
 
-  ADD_PRODUCT(state) {
+  [ADD_PRODUCT](state) {
     state.showLoader = true;
   },
 
-  ADD_PRODUCT_SUCCESS(state, payload) {
+  [ADD_PRODUCT_SUCCESS](state, payload) {
     state.showLoader = false;
 
     const { product } = payload;
-    state.product = newProduct;
     state.products = state.products.concat(product);
   },
 };
 
 export const cartMutations = {
-  ADD_TO_CART(state, payload) {
+  [ADD_TO_CART](state, payload) {
     const { product } = payload;
     state.cart.push(product);
   },
 
-  REMOVE_FROM_CART(state, payload) {
+  [REMOVE_FROM_CART](state, payload) {
     const { productId } = payload;
     state.cart = state.cart.filter(product =>
       product._id !== productId);
@@ -78,26 +102,64 @@ export const cartMutations = {
 };
 
 export const manufacturerMutations = {
-  ALL_MANUFACTURERS(state) {
+  [ALL_MANUFACTURERS](state) {
     state.showLoader = true;
   },
 
-  ALL_MANUFACTURERS_SUCCESS(state, payload) {
+  [ALL_MANUFACTURERS_SUCCESS](state, payload) {
     state.showLoader = false;
 
     const { manufacturers } = payload;
     state.manufacturers = manufacturers;
   },
 
-  REMOVE_MUFACTURER(state) {
+  [ADD_MANUFACTURER](state) {
     state.showLoader = true;
   },
 
-  REMOVE_MUFACTURER_SUCCESS(stat, payload) {
+  [ADD_MANUFACTURER_SUCCESS](state, payload) {
+    state.showLoader = false;
+
+    const { manufacturer } = payload;
+    state.manufacturer = state.manufacturers.concat(manufacturer);
+  },
+
+  [MANUFACTURER_BY_ID](state) {
+    state.showLoader = true;
+  },
+
+  [MANUFACTURER_BY_ID_SUCCESS](state, payload) {
+    state.showLoader = false;
+
+    const { manufacturer } = payload;
+    state.manufacturer = manufacturer;
+  },
+
+  [UPDATE_MANUFACTURER](state) {
+    state.showLoader = true;
+  },
+
+  [UPDATE_MANUFACTURER_SUCCESS](state, payload) {
+    state.showLoader = false;
+
+    const { manufacturer: newManufacturer } = payload;
+    state.manufacturers = state.manufacturers.map((manufacturer) => {
+      if (manufacturer._id === newManufacturer._id) {
+        return newManufacturer;
+      }
+      return manufacturer;
+    });
+  },
+
+  [REMOVE_MANUFACTURER](state) {
+    state.showLoader = true;
+  },
+
+  [REMOVE_MANUFACTURER_SUCCESS](state, payload) {
     state.showLoader = false;
 
     const { manufacturerId } = payload;
     state.manufacturers = state.manufacturers.filter(manufacturer =>
       manufacturer._id !== manufacturerId);
   },
-}
+};
