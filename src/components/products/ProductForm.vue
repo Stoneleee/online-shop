@@ -1,86 +1,73 @@
 <template>
-  <form @submit.prevent="saveProduct">
-    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-      <div class="form-group">
-        <label>Name</label>
-        <input
-          type="text"
-          placeholder="Name"
-          v-model="model.name"
-          name="name"
-          class="form-control"
-        />
-      </div>
-      <div class="form-group">
-        <label>Price</label>
-        <input
-          type="number"
-          class="form-control"
-          placeholder="Price"
-          v-model="model.price"
-          name="price"
-        >
-      </div>
-      <div class="form-group">
-        <label>Manufacturer</label>
-        <select
-          name="manufacturer"
-          type="text"
-          class="form-control"
-          v-model="model.manufacturer"
-        >
-          <template v-for="manufacturer in manufacturers">
-            <option
-              :value="manufacturer._id"
-              :selected="manufacturer._id == (model.manufacturer && model.manufacturer._id)"
-              :key="manufacturer._id"
-            >
-              {{manufacturer.name}}
-            </option>
-          </template>
-        </select>
-      </div>
-    </div>
-
-    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-      <div class="form-group">
-        <label>Image</label>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Image"
-          v-model="model.image"
-          name="image"
-        />
-      </div>
-      <div class="form-group">
-        <label>Description</label>
-        <textarea
-          name="descript"
-          class="group-control"
-          placeholder="Descript"
-          rows="5"
-          v-model="model.descript"
-        >
-        </textarea>
-      </div>
-      <div class="form-group new-button">
-        <button class="button">
-          <i class="fa fa-pencil"></i>
-          <span v-if="isEditing">Update Product</span>
-          <span v-else>Add Product</span>
-        </button>
-      </div>
-    </div>
-  </form>
+  <div class="productInfo">
+    <el-form
+      class="form"
+      ref="form"
+      :model="model"
+      label-width="180px"
+    >
+      <el-form-item label="商品名称">
+        <el-input v-model="model.name"></el-input>
+      </el-form-item>
+      <el-form-item label="价格">
+        <el-input v-model="model.price"></el-input>
+      </el-form-item>
+      <el-form-item label="制造商">
+        <el-select v-model="model.manufacturer.name" clearable placeholder="请选择制造商">
+          <el-option
+            v-for="manufacturer in manufacturers"
+            :key="manufacturer._id"
+            :label="manufacturer.name"
+            :value="manufacturer.name"
+          ></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="商品图片">
+        <el-input v-model="model.image"></el-input>
+      </el-form-item>
+      <el-form-item label="商品描述">
+        <el-input type="textarea" v-model="model.description"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button
+          v-if="isEditing"
+          type="primary"
+          @click="onSubmit"
+        >修改商品</el-button>
+        <el-button
+          v-else
+          @click="onSubmit"
+        >添加商品</el-button>
+      </el-form-item>
+    </el-form>
+  </div>
 </template>
+
+<style>
+  .productInfo {
+    padding-top: 10px;
+  }
+
+  .form {
+    margin: 0 auto;
+    width: 500px;
+  }
+
+  .el-input__inner {
+    height:60px;
+  }
+</style>
 
 <script>
 export default {
   props: ['model', 'manufacturers', 'isEditing'],
+  created() {
+    // console.log(this.manufacturers);
+    // console.log(this.model);
+  },
   methods: {
-    saveProduct() {
-      this.$emit('save-product', this.model)
+    onSubmit() {
+      this.$emit('save-product', this.model);
     }
   }
 }

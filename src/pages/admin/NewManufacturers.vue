@@ -1,19 +1,15 @@
 <template>
-  <manufacturer-form
-    @save-manufacturer="addManufacturer"
-    :model="model"
-  >
-  </manufacturer-form>
+  <manufacturer-form @save-manufacturer="addManufacturer" :model="model"></manufacturer-form>
 </template>
 
 <script>
 import ManufacturerForm from '@/components/ManufacturerForm';
 
 export default {
-  computed: {
-    model() {
-      return {};
-    },
+  data() {
+    return {
+      model: {}
+    }
   },
   methods: {
     addManufacturer(model) {

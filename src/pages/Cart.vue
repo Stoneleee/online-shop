@@ -3,9 +3,9 @@
     <div class="title">
       <h1>{{msg}}</h1>
     </div>
-    <template v-for="product in cart">
-      <product-item :key="product._id" :product="product"></product-item>
-    </template>
+    <!-- <template v-for="product in cart"> -->
+      <product-item :products="cart"></product-item>
+    <!-- </template> -->
   </div>
 </template>
 

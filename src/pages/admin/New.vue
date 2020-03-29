@@ -8,20 +8,28 @@
 </template>
 
 <script>
-import ProductForm from '@/components/products/ProductForm.vue';
+import ProductForm from '@/components/products/ProductForm';
 export default {
+  data() {
+    return {
+      model: {
+        manufacturer: {
+          name: '',
+        },
+      },
+    }
+  },
   created() {
     if (this.manufacutrers.length === 0) {
+      console.log('created');
       this.$store.dispatch('allManufacturers');
     }
   },
   computed: {
-    manufacutrers() {
+    manufacturers() {
+      console.log('get manufacturers');
       return this.$store.getters.allManufacturers;
     },
-    model() {
-      return {};
-    }
   },
   methods: {
     addProduct(model) {

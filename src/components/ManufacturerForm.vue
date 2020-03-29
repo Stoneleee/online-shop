@@ -1,31 +1,37 @@
 <template>
-  <form @submit.prevent="saveManufacturer">
-    <div class="form-group">
-      <label>Name</label>
-      <input
-        type="text"
-        placeholder="Name"
-        v-model="model.name"
-        name="name"
-        class="form-control" />
-    </div>
-
-    <div class="form-group new-button">
-      <button class="button">
-        <i class="fa fa-pencil"></i>
-        <!-- Conditional rendering for input text -->
-        <span v-if="isEditing">修改生产商</span>
-        <span v-else>添加生产商</span>
-      </button>
-    </div>
-  </form>
+  <div class="manufacturerInfo">
+    <el-for class="form" ref="form" :model="model" label-width="180px">
+      <el-form-item label="制造商名称">
+        <el-input v-model="model.name"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button v-if="isEditing" type="primary" @click="onSubmit">修改</el-button>
+        <el-button v-else @click="onSubmit">添加</el-button>
+      </el-form-item>
+    </el-for>
+  </div>
 </template>
+
+<style>
+  .manufacturerInfo {
+    padding-top: 10px;
+  }
+
+  .form {
+    margin: 0 auto;
+    width: 500px;
+  }
+
+  .el-input__inner {
+    height: 50px;
+  }
+</style>
 
 <script>
 export default {
   props: ['model', 'isEditing'],
   methods: {
-    saveManufacturer() {
+    onSubmit() {
       this.$emit('save-manufacturer', this.model);
     },
   },
