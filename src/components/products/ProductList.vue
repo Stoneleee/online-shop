@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="products">
-      <div class="container">This is Product list</div>
+      <div class="container">商品列表</div>
       <!-- <template v-for="product in products"> -->
       <product-item :products="products"></product-item>
       <!-- </template> -->

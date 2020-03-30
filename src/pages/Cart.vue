@@ -25,7 +25,7 @@ export default {
   name: 'cart',
   data() {
     return {
-      msg: 'cart page.',
+      msg: '购物车',
     };
   },
 

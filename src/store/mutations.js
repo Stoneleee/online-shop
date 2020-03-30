@@ -22,6 +22,7 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
 } from './mutation-types';
+import { Message } from 'element-ui';
 
 export const productMutations = {
   [ALL_PRODUCTS](state) {
@@ -92,12 +93,20 @@ export const cartMutations = {
   [ADD_TO_CART](state, payload) {
     const { product } = payload;
     state.cart.push(product);
+    Message({
+      message: '购物车添加成功!',
+      type: 'success',
+    });
   },
 
   [REMOVE_FROM_CART](state, payload) {
     const { productId } = payload;
     state.cart = state.cart.filter(product =>
       product._id !== productId);
+    Message({
+      message: '购物车移除成功!',
+      type: 'success',
+    });
   },
 };
 
