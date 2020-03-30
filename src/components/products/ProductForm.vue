@@ -21,7 +21,7 @@
             v-for="manufacturer in manufacturers"
             :key="manufacturer._id"
             :label="manufacturer.name"
-            :value="manufacturer"
+            :value="manufacturer.name"
           ></el-option>
         </el-select>
       </el-form-item>
