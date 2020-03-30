@@ -121,7 +121,7 @@ export const manufacturerMutations = {
     state.showLoader = false;
 
     const { manufacturer } = payload;
-    state.manufacturer = state.manufacturers.concat(manufacturer);
+    state.manufacturers = state.manufacturers.concat(manufacturer);
   },
 
   [MANUFACTURER_BY_ID](state) {

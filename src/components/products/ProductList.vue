@@ -11,6 +11,7 @@
 
 <script>
 import ProductItem from './ProductItem';
+
 export default {
   name: 'product-list',
   created() {
@@ -23,11 +24,11 @@ export default {
     // a computed getter
     products() {
       return this.$store.getters.allProducts;
-    }
+    },
   },
 
   components: {
-    'product-item': ProductItem
+    'product-item': ProductItem,
   },
-}
+};
 </script>

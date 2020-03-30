@@ -8,8 +8,8 @@ import ManufacturerForm from '@/components/ManufacturerForm';
 export default {
   data() {
     return {
-      model: {}
-    }
+      model: {},
+    };
   },
   methods: {
     addManufacturer(model) {

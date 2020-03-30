@@ -1,14 +1,14 @@
 <template>
   <div class="manufacturerInfo">
-    <el-for class="form" ref="form" :model="model" label-width="180px">
+    <el-form class="form" ref="form" label-width="180px">
       <el-form-item label="制造商名称">
-        <el-input v-model="model.name"></el-input>
+        <el-input v-model="modelData.name"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button v-if="isEditing" type="primary" @click="onSubmit">修改</el-button>
         <el-button v-else @click="onSubmit">添加</el-button>
       </el-form-item>
-    </el-for>
+    </el-form>
   </div>
 </template>
 
@@ -30,9 +30,15 @@
 <script>
 export default {
   props: ['model', 'isEditing'],
+  computed: {
+    modelData() {
+      const res = { ...this.model };
+      return res;
+    },
+  },
   methods: {
     onSubmit() {
-      this.$emit('save-manufacturer', this.model);
+      this.$emit('save-manufacturer', this.modelData);
     },
   },
 };

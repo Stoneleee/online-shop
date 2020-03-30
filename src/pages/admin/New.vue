@@ -9,6 +9,7 @@
 
 <script>
 import ProductForm from '@/components/products/ProductForm';
+
 export default {
   data() {
     return {
@@ -17,17 +18,15 @@ export default {
           name: '',
         },
       },
-    }
+    };
   },
   created() {
-    if (this.manufacutrers.length === 0) {
-      console.log('created');
+    if (this.manufacturers.length === 0) {
       this.$store.dispatch('allManufacturers');
     }
   },
   computed: {
     manufacturers() {
-      console.log('get manufacturers');
       return this.$store.getters.allManufacturers;
     },
   },
@@ -35,11 +34,11 @@ export default {
     addProduct(model) {
       this.$store.dispatch('addProduct', {
         product: model,
-      })
+      });
     },
   },
   components: {
-    'product-form': ProductForm
-  }
-}
+    'product-form': ProductForm,
+  },
+};
 </script>

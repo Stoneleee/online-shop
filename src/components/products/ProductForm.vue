@@ -3,30 +3,29 @@
     <el-form
       class="form"
       ref="form"
-      :model="model"
       label-width="180px"
     >
       <el-form-item label="商品名称">
-        <el-input v-model="model.name"></el-input>
+        <el-input v-model="modelData.name"></el-input>
       </el-form-item>
       <el-form-item label="价格">
-        <el-input v-model="model.price"></el-input>
+        <el-input v-model="modelData.price"></el-input>
       </el-form-item>
       <el-form-item label="制造商">
-        <el-select v-model="model.manufacturer.name" clearable placeholder="请选择制造商">
+        <el-select v-model="modelData.manufacturer.name" clearable placeholder="请选择制造商">
           <el-option
             v-for="manufacturer in manufacturers"
             :key="manufacturer._id"
             :label="manufacturer.name"
-            :value="manufacturer.name"
+            :value="manufacturer"
           ></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="商品图片">
-        <el-input v-model="model.image"></el-input>
+        <el-input v-model="modelData.image"></el-input>
       </el-form-item>
       <el-form-item label="商品描述">
-        <el-input type="textarea" v-model="model.description"></el-input>
+        <el-input type="textarea" v-model="modelData.description"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button
@@ -60,15 +59,34 @@
 
 <script>
 export default {
+  data() {
+    return {
+      modelData: {
+        manufacturer: {
+          name: '',
+        },
+      },
+    };
+  },
   props: ['model', 'manufacturers', 'isEditing'],
   created() {
-    // console.log(this.manufacturers);
-    // console.log(this.model);
+    const product = this.model;
+
+    this.modelData = { ...product, manufacturer: { ...product.manufacturer } };
+  },
+  watch: {
+    model(val, oldVal) {
+      this.modelData = val;
+    },
   },
   methods: {
     onSubmit() {
-      this.$emit('save-product', this.model);
-    }
-  }
-}
+      const manufacturer = this.manufacturers.find(
+        item => item.name === this.modelData.manufacturer.name);
+
+      this.modelData.manufacturer = manufacturer;
+      this.$emit('save-product', this.modelData);
+    },
+  },
+};
 </script>

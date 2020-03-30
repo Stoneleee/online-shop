@@ -53,7 +53,7 @@ export default {
   computed: {
     products() {
       return this.$store.getters.allProducts;
-    }
+    },
   },
   methods: {
     removeProduct(productId) {
@@ -65,7 +65,7 @@ export default {
           productId,
         });
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
