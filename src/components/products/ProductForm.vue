@@ -4,6 +4,10 @@
       class="form"
       ref="form"
       label-width="180px"
+      v-loading="loading"
+      element-loading-text="拼命加载中"
+      element-loading-spinner="el-icon-loading"
+      element-loading-background="rgba(0,0,0,0.8)"
     >
       <el-form-item label="商品名称">
         <el-input v-model="modelData.name"></el-input>
@@ -31,6 +35,7 @@
         <el-button
           v-if="isEditing"
           type="primary"
+          native-type="submit"
           @click="onSubmit"
         >修改商品</el-button>
         <el-button
@@ -77,6 +82,11 @@ export default {
   watch: {
     model(val, oldVal) {
       this.modelData = val;
+    },
+  },
+  computed: {
+    loading() {
+      return this.$store.state.showLoader;
     },
   },
   methods: {

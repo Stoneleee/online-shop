@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Message } from 'element-ui';
 
 import {
   ADD_PRODUCT,
@@ -48,6 +49,13 @@ export const productActions = {
         commit(ADD_PRODUCT_SUCCESS, {
           product: response.data,
         });
+        Message({
+          message: '商品添加成功！',
+          type: 'success',
+        });
+      })
+      .catch(() => {
+        Message.error('商品添加失败，请重试！');
       });
   },
 
@@ -73,6 +81,13 @@ export const productActions = {
         commit(UPDATE_PRODUCT_SUCCESS, {
           product,
         });
+        Message({
+          message: '商品修改成功！',
+          type: 'success',
+        });
+      })
+      .catch(() => {
+        Message.error('商品修改失败，请重试！');
       });
   },
 
@@ -87,6 +102,13 @@ export const productActions = {
         commit(REMOVE_PRODUCT_SUCCESS, {
           productId,
         });
+        Message({
+          message: '商品删除成功！',
+          type: 'success',
+        });
+      })
+      .catch(() => {
+        Message.error('商品删除失败，请重试！');
       });
   },
 };
@@ -114,6 +136,13 @@ export const manufacturerActions = {
         commit(ADD_MANUFACTURER_SUCCESS, {
           manufacturer: response.data,
         });
+        Message({
+          message: '制造商添加成功！',
+          type: 'success',
+        });
+      })
+      .catch(() => {
+        Message.error('制造商添加失败，请重试！');
       });
   },
 
@@ -140,6 +169,13 @@ export const manufacturerActions = {
         commit(UPDATE_MANUFACTURER_SUCCESS, {
           manufacturer: response.data,
         });
+        Message({
+          message: '制造商修改成功！',
+          type: 'success',
+        });
+      })
+      .catch(() => {
+        Message.error('制造商修改失败，请重试！');
       });
   },
 
@@ -153,6 +189,13 @@ export const manufacturerActions = {
         commit(REMOVE_MANUFACTURER_SUCCESS, {
           manufacturerId,
         });
+        Message({
+          message: '制造商删除成功！',
+          type: 'success',
+        });
+      })
+      .catch(() => {
+        Message.error('制造商删除失败，请重试！');
       });
   },
 };

@@ -143,6 +143,7 @@ export const manufacturerMutations = {
     state.showLoader = false;
 
     const { manufacturer: newManufacturer } = payload;
+    state.manufacturer = newManufacturer;
     state.manufacturers = state.manufacturers.map((manufacturer) => {
       if (manufacturer._id === newManufacturer._id) {
         return newManufacturer;

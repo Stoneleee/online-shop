@@ -1,11 +1,24 @@
 <template>
   <div class="manufacturerInfo">
-    <el-form class="form" ref="form" label-width="180px">
+    <el-form
+      class="form"
+      ref="form"
+      label-width="180px"
+      v-loading="loading"
+      element-loading-text="拼命加载中"
+      element-loading-spinner="el-icon-loading"
+      element-loading-background="rgba(0, 0, 0, 0.8)"
+    >
       <el-form-item label="制造商名称">
-        <el-input v-model="modelData.name"></el-input>
+        <el-input v-model="manufacturerData.name"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button v-if="isEditing" type="primary" @click="onSubmit">修改</el-button>
+        <el-button
+          v-if="isEditing"
+          type="primary"
+          native-type="submit"
+          @click="onSubmit"
+        >修改</el-button>
         <el-button v-else @click="onSubmit">添加</el-button>
       </el-form-item>
     </el-form>
@@ -30,15 +43,29 @@
 <script>
 export default {
   props: ['model', 'isEditing'],
+  data() {
+    return {
+      manufacturerData: {
+        name: '',
+      },
+    };
+  },
+  created() {
+    this.manufacturerData = this.model;
+  },
+  watch: {
+    model(val, oldVal) {
+      this.manufacturerData = val;
+    },
+  },
   computed: {
-    modelData() {
-      const res = { ...this.model };
-      return res;
+    loading() {
+      return this.$store.state.showLoader;
     },
   },
   methods: {
     onSubmit() {
-      this.$emit('save-manufacturer', this.modelData);
+      this.$emit('save-manufacturer', this.manufacturerData);
     },
   },
 };
